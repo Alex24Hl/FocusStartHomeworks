@@ -22,10 +22,10 @@ enum Command: Int, CaseIterable, CustomStringConvertible {
         }
     }
     
-    case add = 0
-    case list = 1
-    case filterList = 2
-    case exit = 3
+    case add
+    case list
+    case filterList
+    case exit
 }
 
 var cars = [Car]()
@@ -36,20 +36,16 @@ func run() {
 
 func showMenu() {
     while true {
-        print("""
-                Список команд:
-                0 - Добавить автомобиль
-                1 - Вывести список добавленных автомобилей
-                2 - Вывести список отфильтрованных автомобилей по кузову
-                3 - Выход
-                """)
-        print()
+        
+        for (index, command) in Command.allCases.enumerated() {
+            print("\(index). \(command.description)")
+        }
         
         let command = selectCommand()
         
         switch command {
         case .add:
-            cars.append(addCars())
+            cars.append(addCar())
         case .list:
             listOfAddedCars()
         case .filterList:
@@ -70,7 +66,7 @@ func selectCommand() -> Command {
     }
 }
 
-func addCars() -> Car {
+func addCar() -> Car {
     let manufacture = strongReadLine(text: "Производитель: ")
     let model = strongReadLine(text: "Модель: ")
     
@@ -122,11 +118,7 @@ func listOfAddedCars() {
 func filterListCars() {
     let body = bodyCar()
     
-    for car in cars {
-        if car.body == body {
-            print(car)
-        }
-    }
+    cars.filter { $0.body == body }.forEach { print($0) }
 }
 
 
