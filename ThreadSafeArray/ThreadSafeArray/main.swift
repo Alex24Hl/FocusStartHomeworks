@@ -29,14 +29,13 @@ func appendElements() {
     }
 }
 
-newQueue.async(group: group) {
-    appendElements()
-}
+appendElements()
 
 group.wait()
 
 sleep(2)
 print("Количество элементов в массиве \(array.count)")
+
 
 
 

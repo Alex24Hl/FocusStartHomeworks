@@ -9,27 +9,39 @@ import Foundation
 
 class ThreadSafeArray<T> {
     
-    private var saveArray = [T]()
+    private var array = [T]()
     private let queue = DispatchQueue(label: "ConcurrentQueue", attributes: .concurrent)
     
     var count: Int {
-        return saveArray.count
+        self.queue.sync {
+            array.count
+        }
     }
     
     var isEmpty: Bool {
-        saveArray.isEmpty
+        self.queue.sync {
+            array.isEmpty
+        }
     }
     
     func append(_ item: T) {
         self.queue.async(flags: .barrier) {
-            self.saveArray.append(item)
+            self.array.append(item)
         }
     }
     
     func remove(at index: Int) {
         self.queue.async(flags: .barrier) {
-            if index < self.saveArray.count {
-                self.saveArray.remove(at: index)
+            if index < self.array.count {
+                self.array.remove(at: index)
+            }
+        }
+    }
+    
+    subscript(index: Int) -> T {
+        get {
+            return self.queue.sync {
+                self.array[index]
             }
         }
     }
@@ -38,7 +50,7 @@ class ThreadSafeArray<T> {
 extension ThreadSafeArray where T: Equatable {
     func containts(_ element: T) -> Bool {
         queue.sync {
-            self.saveArray.contains(element)
+            self.array.contains(element)
         }
     }
 }
