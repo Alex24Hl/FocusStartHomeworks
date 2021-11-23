@@ -9,7 +9,7 @@ import UIKit
 
 final class ShowComposition: UIViewController {
     
-    let closeButton = UIButton()
+    private let closeButton = UIButton()
     
     
     override func viewDidLoad() {
