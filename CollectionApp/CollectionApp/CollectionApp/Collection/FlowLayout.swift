@@ -12,9 +12,11 @@ final class FlowLayout: UICollectionViewFlowLayout {
     enum Constant {
         static let portrait = 2
         static let land = 5
+        static let inserts: CGFloat = 20
+        
     }
 
-    var sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    var sectionInserts = UIEdgeInsets(top: Constant.inserts, left: Constant.inserts, bottom: Constant.inserts, right: Constant.inserts)
         
     override func prepare() {
         super.prepare()
