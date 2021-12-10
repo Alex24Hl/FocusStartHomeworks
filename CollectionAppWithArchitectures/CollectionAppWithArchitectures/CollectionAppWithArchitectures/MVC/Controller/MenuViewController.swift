@@ -31,10 +31,10 @@ final class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMenuView()
+        self.setupMenuView()
     }
     
-    func setupMenuView() {
+    private func setupMenuView() {
         self.menuView?.configView()
         self.menuView?.backgroundColor = .systemBackground
         self.menuView?.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +51,11 @@ final class MenuViewController: UIViewController {
 
 extension MenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.transitionDetailViewController(from: collectionView)
+    }
+    
+    private func transitionDetailViewController(from collectionView: UICollectionView) {
+        guard let indexPath = collectionView.indexPathsForSelectedItems?.first else { return }
         let food = foods[indexPath.item]
         let detailViewController = DetailViewController(food: food)
         self.navigationController?.pushViewController(detailViewController, animated: true)
