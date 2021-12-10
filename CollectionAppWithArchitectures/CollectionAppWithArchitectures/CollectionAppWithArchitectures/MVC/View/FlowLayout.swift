@@ -9,7 +9,7 @@ import UIKit
 
 class FlowLayout: UICollectionViewFlowLayout {
     
-    enum Constant {
+    private enum Constant {
         static let portrait = 2
         static let land = 5
         static let insertsTwenty: CGFloat = 20
@@ -19,7 +19,7 @@ class FlowLayout: UICollectionViewFlowLayout {
     
     override func prepare() {
         super.prepare()
-        
+    
         guard let collectionView = self.collectionView else { return }
         
         let screen = UIScreen.main.bounds
