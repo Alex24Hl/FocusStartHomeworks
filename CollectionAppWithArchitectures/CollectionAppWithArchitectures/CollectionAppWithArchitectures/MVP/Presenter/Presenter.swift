@@ -8,10 +8,12 @@
 import Foundation
 
 final class Presenter {
+    
+    private weak var detailView: DetailView?
+    private weak var detailController: DetailViewController?
+    
     private let model = FoodModel.shared
     private let food: Food
-    private weak var detailView: DetailView?
-    private var detailController: DetailViewController?
     
     init(food: Food) {
         self.food = food

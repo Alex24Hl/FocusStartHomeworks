@@ -65,8 +65,8 @@ final class MenuView: UIView {
         self.setupMainLabel()
         self.setupCollectionView()
         
-        collectionView.delegate = controller
-        collectionView.dataSource = controller
+        self.collectionView.delegate = self.controller
+        self.collectionView.dataSource = self.controller
     }
     
     func loadView(controller: MenuViewController) {

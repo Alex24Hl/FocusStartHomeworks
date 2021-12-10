@@ -25,13 +25,6 @@ final class DetailViewController: UIViewController {
         super.loadView()
         self.presenter.loadView(detailController: self, detailView: self.customView)
     }
-
-//    var someFood: Food? {
-//        didSet {
-//            guard let someFood = someFood else {return}
-//            self.imageView.image = UIImage(named: someFood.image)
-//        }
-//    }
     
     override func viewDidLoad() {
         self.view.addSubview(customView)

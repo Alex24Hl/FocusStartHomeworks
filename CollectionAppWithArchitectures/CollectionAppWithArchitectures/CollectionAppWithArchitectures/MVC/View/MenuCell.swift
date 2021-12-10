@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol IMenuCell {
+    func update(name: String)
+}
+
 final class MenuCell: UICollectionViewCell {
     
     static let identifier = "MenuCell"
@@ -30,12 +34,18 @@ final class MenuCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupImageView() {
+    private func setupImageView() {
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         
         self.imageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor).isActive = true
         self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+}
+
+extension MenuCell: IMenuCell {
+    func update(name: String) {
+        self.imageView.image = UIImage(named: someFood?.image ?? "")
     }
 }
